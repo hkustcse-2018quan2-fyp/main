@@ -20,7 +20,7 @@ import org.opencv.imgproc.Imgproc;
 
 public class MainActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
 
-    private static final String TAG = "vor::Activity";
+    private static final String TAG = "vorusingopencv::Activity";
     Mat mRgba;
     private CameraBridgeViewBase _cameraBridgeViewBase;
 
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
                 new String[]{Manifest.permission.CAMERA},
                 1);
 
-        _cameraBridgeViewBase = (CameraBridgeViewBase) findViewById(R.id.main_surface);
+        _cameraBridgeViewBase = findViewById(R.id.main_surface);
         _cameraBridgeViewBase.setVisibility(SurfaceView.VISIBLE);
         _cameraBridgeViewBase.setCvCameraViewListener(this);
     }
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         super.onResume();
         if (!OpenCVLoader.initDebug()) {
             Log.d(TAG, "Internal OpenCV library not found. Using OpenCV Manager for initialization");
-            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_0_0, this, _baseLoaderCallback);
+            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_4_0, this, _baseLoaderCallback);
         } else {
             Log.d(TAG, "OpenCV library found inside package. Using it!");
             _baseLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
