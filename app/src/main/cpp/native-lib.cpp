@@ -40,7 +40,7 @@ void JNICALL Java_fyp2018_hkust_vorusingopencv_MainActivity_salt(JNIEnv *env, jo
 
     for (size_t i = 0; i < faces.size(); i++) {
         rectangle(frame, Point(faces[i].x + faces[i].width, faces[i].y),
-                  Point(faces[i].x, faces[i].y + faces[i].height), Scalar(255, 0, 255), 4, 8, 0);
+                  Point(faces[i].x, faces[i].y + faces[i].height), Scalar(255, 0, 0), 2, 8, 0);
 
         Mat faceROI = frame_gray(faces[i]);
         std::vector<Rect> eyes;
@@ -49,10 +49,9 @@ void JNICALL Java_fyp2018_hkust_vorusingopencv_MainActivity_salt(JNIEnv *env, jo
         eyes_cascade.detectMultiScale(faceROI, eyes, 1.1, 2, 0 | CV_HAAR_SCALE_IMAGE, Size(30, 30));
 
         for (size_t j = 0; j < eyes.size(); j++) {
-            Point center(faces[i].x + eyes[j].x + eyes[j].width * 0.5,
-                         faces[i].y + eyes[j].y + eyes[j].height * 0.5);
-            int radius = cvRound((eyes[j].width + eyes[j].height) * 0.25);
-            circle(frame, center, radius, Scalar(255, 0, 0), 4, 8, 0);
+            rectangle(frame, Point(faces[i].x + eyes[j].x + eyes[j].width, faces[i].y + eyes[j].y),
+                      Point(faces[i].x + eyes[j].x, faces[i].y + eyes[j].y + eyes[j].height),
+                      Scalar(255, 0, 255), 2, 8, 0);
         }
     }
 }
