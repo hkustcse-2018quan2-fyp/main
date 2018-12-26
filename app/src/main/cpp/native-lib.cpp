@@ -14,23 +14,17 @@ extern "C"
 void JNICALL Java_fyp2018_hkust_vorusingopencv_MainActivity_salt(JNIEnv *env, jobject instance,
                                                                  jlong matAddrGray) {
     Mat frame = *(Mat *) matAddrGray;
-
-    String face_cascade_name = "/storage/emulated/0/vor/haarcascade_frontalface_alt.xml";
     CascadeClassifier face_cascade;
-
-    if (!face_cascade.load(face_cascade_name)) {
-        printf("--(!)Error loading\n");
-        return;
-    };
-
     std::vector<Rect> faces;
     Mat frame_gray;
+
+    face_cascade.load("/storage/emulated/0/vor/lbpcascade_frontalface_improved.xml");
 
     cvtColor(frame, frame_gray, CV_BGR2GRAY);
     equalizeHist(frame_gray, frame_gray);
 
     //Faces
-    face_cascade.detectMultiScale(frame_gray, faces, 1.1, 2, 0 | CV_HAAR_SCALE_IMAGE, Size(30, 30));
+    face_cascade.detectMultiScale(frame_gray, faces, 1.1, 5);
 
     for (size_t i = 0; i < faces.size(); i++) {
         rectangle(frame, Point(faces[i].x + faces[i].width, faces[i].y),
