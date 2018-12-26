@@ -58,6 +58,9 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         ActivityCompat.requestPermissions(MainActivity.this,
                 new String[]{Manifest.permission.CAMERA},
                 1);
+        ActivityCompat.requestPermissions(MainActivity.this,
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                1);
 
         _cameraBridgeViewBase = findViewById(R.id.main_surface);
         _cameraBridgeViewBase.setVisibility(SurfaceView.VISIBLE);
@@ -123,9 +126,6 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
         mRgba = inputFrame.rgba();
-        //Mat rotateMat = Imgproc.getRotationMatrix2D(new Point(mRgba.width() / 2, mRgba.height() / 2), 180, 1);
-        //Imgproc.warpAffine(mRgba, mRgba, rotateMat, mRgba.size());
-
         salt(mRgba.getNativeObjAddr());
         return mRgba;
     }
