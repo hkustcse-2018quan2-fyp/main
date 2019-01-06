@@ -5,9 +5,12 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/core/core.hpp>
 #include <opencv2/features2d/features2d.hpp>
+#include <opencv2/face.hpp>
 
 using namespace std;
 using namespace cv;
+using namespace cv::face;;
+
 
 extern "C"
 {
